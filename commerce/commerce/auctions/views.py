@@ -18,7 +18,11 @@ class CreateListingForm(forms.Form):
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    all_listings = Listing.objects.all()
+
+    return render(request, "auctions/index.html", {
+        "listings": all_listings
+    })
 
 
 def login_view(request):

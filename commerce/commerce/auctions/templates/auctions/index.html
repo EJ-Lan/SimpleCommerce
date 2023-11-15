@@ -3,5 +3,24 @@
 {% block body %}
     <h2 class="page-heading">Active Listings</h2>
 
-    TODO
+    <div class="active-container">
+        {% for listing in listings %}
+            {%  if listing.is_active %}
+                <div class="active-content">
+                    <h3>{{listing.title}}</h3>
+                    {% if listing.image_url %}
+                    <img src="{{ listing.image_url }}" alt="Image for the listing">
+                    {% else %}
+                    <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg" alt="Placeholder picture">
+                    {% endif %}
+                    <p>{{listing.description}}</p>
+                    <p>Starting Bid:{{listing.start_bid}}</p>
+                </div>
+            {% endif %}
+            {% empty %}
+            <h2 class="empty-message">No Active Listings...</h2>
+        {% endfor %}
+    </div>
+    
+
 {% endblock %}
