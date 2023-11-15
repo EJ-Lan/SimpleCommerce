@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
@@ -6,6 +7,13 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User
+
+class CreateListingForm(forms.Form):
+    title = forms.CharField(label='Title', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    starting_bid = forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    category = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    image_url = forms.URLField(max_length=200, widget=forms.URLInput(attrs={'class': 'form-control'}))
 
 
 def index(request):
@@ -62,3 +70,8 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+    
+def create(request):
+    return render(request, "auctions/create.html", {
+        "create_form": CreateListingForm()
+    })    
