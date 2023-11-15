@@ -1,6 +1,7 @@
 /* Adds padding around the entire content of the body to prevent elements from touching the edges of the screen */
 body {
     padding: 10px;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
 }
 
 /* Styles for form inputs with the class 'form-control'. Sets width to full container, adds padding, margin, and styles the border */
@@ -68,11 +69,17 @@ input[type=submit]:hover {
     padding: 8px;
     margin: 8px;
     gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
     border: 1px solid #ddd; /* Light grey border */
     background-color: #ffffff; /* White background */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     border-radius: 4px; /* Rounded corners for each listing */
     width: 300px; /* Fixed width, adjust as necessary */
+}
+
+.active-container h3 {
+    font-weight: 600;
 }
 
 img {
