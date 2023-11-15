@@ -133,9 +133,15 @@ def toggle_watchlist(request, pk):
 
     return HttpResponseRedirect(reverse('listing_view', args=[pk]))
 
+@login_required
 def watchlist(request):
-    
-    return render(request, "auctions/watchlist.html")
+    # Get listings in the user's watchlist
+    user_watchlist = request.user.watchlist.all()
+
+    return render(request, "auctions/watchlist.html", {
+        "listings": user_watchlist
+    })
+
 
 def categories(request):
     categories = Listing.objects.exclude(category__isnull=True).exclude(category='').values_list('category', flat=True).distinct()
