@@ -15,7 +15,6 @@ class Listing(models.Model):
     is_active = models.BooleanField(default=True)
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="won_listing")
 
-
     def __str__(self):
        return f"Title: {self.title}, Description: {self.description}, Start Bid: {self.start_bid}"
     
