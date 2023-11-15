@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listings in {{ category }}</h2>
+    <div class="active-container">
+        {% for listing in listings %}
+            {% if listing.is_active %}
+                <div class="active-content">
+                    <h3>{{ listing.title }}</h3>
+                    {% if listing.image_url %}
+                        <a href="{% url 'listing_view' pk=listing.id %}">
+                            <img src="{{ listing.image_url }}" alt="Image for the listing">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'listing_view' pk=listing.id %}">
+                            <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg" alt="Placeholder picture">
+                        </a>
+                    {% endif %}
+                    <p>{{ listing.description }}</p>
+                    <p>Start Bid: {{ listing.start_bid }}</p>
+                    <p>Current Bid: {{ listing.current_bid }}</p>
+                </div>
+            {% endif %}
+        {% empty %}
+            <h2 class="empty-message">No Active Listings...</h2>
+        {% endfor %}
+    </div>
+{% endblock %}

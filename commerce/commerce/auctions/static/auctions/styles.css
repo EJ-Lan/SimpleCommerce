@@ -232,3 +232,26 @@ input[type=submit].watchlist-btn {
 input[type=submit].watchlist-btn:hover {
     background-color: #0056b3;
 }
+
+.category-list {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f8f8; /* Light gray background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.category-link {
+    display: inline-block;
+    margin: 10px;
+    padding: 8px 15px;
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.category-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

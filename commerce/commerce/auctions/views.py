@@ -134,4 +134,18 @@ def toggle_watchlist(request, pk):
     return HttpResponseRedirect(reverse('listing_view', args=[pk]))
 
 def watchlist(request):
+    
     return render(request, "auctions/watchlist.html")
+
+def categories(request):
+    categories = Listing.objects.exclude(category__isnull=True).exclude(category='').values_list('category', flat=True).distinct()
+    return render(request, "auctions/categories.html", {
+        "categories": categories
+    })
+
+def category_listings(request, category_name):
+    listings = Listing.objects.filter(category=category_name, is_active=True)
+    return render(request, "auctions/category_listings.html", {
+        "listings": listings,
+        "category": category_name
+    })
