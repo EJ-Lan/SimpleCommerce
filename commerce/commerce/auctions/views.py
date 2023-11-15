@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.contrib import messages
 
@@ -15,6 +15,12 @@ class CreateListingForm(forms.Form):
     starting_bid = forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'class': 'form-control'}))
     category = forms.CharField(max_length=64, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     image_url = forms.URLField(max_length=200,required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
+
+class CreateBidForm(forms.Form):
+    bid_amount = forms.DecimalField(max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+class CreateCommentForm(forms.Form):
+    comment_text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
 
 
 def index(request):
@@ -86,6 +92,7 @@ def create(request):
                 title = form.cleaned_data['title'],
                 description = form.cleaned_data['content'],
                 start_bid = form.cleaned_data['starting_bid'],
+                current_bid = form.cleaned_data['starting_bid'],
                 category = form.cleaned_data['category'],
                 image_url = form.cleaned_data['image_url']
             )
@@ -99,3 +106,15 @@ def create(request):
     return render(request, "auctions/create.html", {
         "create_form": form
     })    
+
+def listing_view(request, pk):
+    listing = get_object_or_404(Listing, pk=pk)
+
+    return render(request, "auctions/listing_view.html", {
+        "listing": listing,
+        "bid_form": CreateBidForm(),
+        "comment_form": CreateCommentForm()
+    })
+
+def watchlist(request):
+    return render(request, "auctions/watchlist.html")

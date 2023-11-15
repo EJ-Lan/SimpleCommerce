@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 class="page-heading">{{listing.title}} Listing</h2>
+
+    
+        <div class="listing-content">
+            <h3>{{listing.title}}</h3>
+            {% if listing.image_url %}
+            <img src="{{ listing.image_url }}" alt="Image for the listing">
+            {% else %}
+            <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg" alt="Placeholder picture">
+            {% endif %}
+            <p>{{listing.description}}</p>
+            <p>Starting Bid:{{listing.start_bid}}</p>   
+            <p>Current Bid:{{listing.current_bid}}</p>   
+        </div>
+
+        <div class="listing-details-container">
+            <div class="watchlist-button">
+                <button>Add Item To Watchlist</button>
+                <button>Remove Item From Watchlist</button>
+            </div>
+    
+            <div class="bid-form">
+                <form>
+                    {{ bid_form }}
+                    <input class="btn btn-primary" type="submit" value="Enter">
+                </form>
+            </div>
+    
+            <div class="close-listing-button">
+                <button>Close Listing</button>
+            </div>
+    
+            <div class="listing-info">
+                <h3>Listing Is Active</h3>
+    
+                <h3>Listing Is No Longer Active</h3>
+    
+                <h3 class="winner">User is the Winner of {{listing.title}}!</h3>
+            </div>
+    
+            <div class="comment-form">
+                <form>
+                    {{ comment_form }}
+                    <input class="btn btn-primary" type="submit" value="Enter">
+                </form>
+            </div>   
+    
+        </div>
+        
+{% endblock %}

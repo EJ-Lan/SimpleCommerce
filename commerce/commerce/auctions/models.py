@@ -12,6 +12,7 @@ class Listing(models.Model):
     category = models.CharField(max_length=64, blank=True)
     image_url = models.URLField(max_length=200, blank=True)
     start_bid = models.DecimalField(max_digits=10, decimal_places=2)
+    current_bid = models.DecimalField(max_digits=10, decimal_places=2, default = 0)
     is_active = models.BooleanField(default=True)
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="won_listing")
 
