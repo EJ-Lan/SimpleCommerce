@@ -175,3 +175,60 @@ img {
     font-weight: bold;
     font-size: 36px;
 }
+
+.listing-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e9ecef; /* Light grey background for visibility */
+    border: 1px solid #dee2e6; /* Slight border for definition */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; /* Center align the text for emphasis */
+}
+
+.listing-info h3 {
+    color: #28a745; /* Green color to signify success or winning */
+    font-size: 1.25rem; /* Slightly larger font size for importance */
+    font-weight: bold; /* Bold font for emphasis */
+    margin-bottom: 10px; /* Spacing below the text */
+}
+
+.listing-info .winner {
+    color: #28a745;
+}
+
+.close-listing-button {
+    margin-top: 20px;
+    text-align: center; /* Center the button for emphasis */
+}
+
+.close-listing-button button {
+    background-color: #dc3545; /* A strong color, typically red for significance */
+    color: white; /* White text for contrast */
+    padding: 12px 20px; /* Adequate padding for better clickability */
+    border: none; /* No border for a modern look */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Appropriately sized font */
+    font-weight: bold; /* Bold text for emphasis */
+    cursor: pointer; /* Cursor changes to pointer to indicate clickability */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.close-listing-button button:hover {
+    background-color: #c82333; /* Slightly darker shade on hover for feedback */
+}
+
+input[type=submit].watchlist-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type=submit].watchlist-btn:hover {
+    background-color: #0056b3;
+}

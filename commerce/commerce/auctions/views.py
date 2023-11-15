@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.contrib import messages
+from django.views.decorators.http import require_POST
 
 from .models import Listing, User
 
@@ -109,12 +110,28 @@ def create(request):
 
 def listing_view(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
+    in_watchlist = False
+    if request.user.is_authenticated:
+        in_watchlist = listing in request.user.watchlist.all()
 
     return render(request, "auctions/listing_view.html", {
         "listing": listing,
         "bid_form": CreateBidForm(),
-        "comment_form": CreateCommentForm()
+        "comment_form": CreateCommentForm(),
+        "in_watchlist": in_watchlist
     })
+
+@login_required
+@require_POST
+def toggle_watchlist(request, pk):
+    listing = get_object_or_404(Listing, pk=pk)
+
+    if listing in request.user.watchlist.all():
+        request.user.watchlist.remove(listing)
+    else:
+        request.user.watchlist.add(listing)
+
+    return HttpResponseRedirect(reverse('listing_view', args=[pk]))
 
 def watchlist(request):
     return render(request, "auctions/watchlist.html")

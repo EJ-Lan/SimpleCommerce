@@ -13,41 +13,53 @@
             {% endif %}
             <p>{{listing.description}}</p>
             <p>Starting Bid:{{listing.start_bid}}</p>   
-            <p>Current Bid:{{listing.current_bid}}</p>   
+            <p>Current Bid:{{listing.current_bid}}</p> 
+            {% if user.is_authenticated %}  
+            <div class="close-listing-button">
+                <button>Close Listing</button>
+            </div>
+            {% endif %}
         </div>
 
-        <div class="listing-details-container">
-            <div class="watchlist-button">
-                <button>Add Item To Watchlist</button>
-                <button>Remove Item From Watchlist</button>
-            </div>
-    
+        {% if user.is_authenticated %}
+        <div class="listing-info">
+            <h3 class="winner">User is the Winner of {{listing.title}}!</h3>
+        </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <div class="watchlist-button">
+            <form action="{% url 'toggle_watchlist' listing.id %}" method="post">
+                {% csrf_token %}
+                {% if in_watchlist %}
+                    <input type="submit" class="watchlist-btn" value="Remove from Watchlist">
+                {% else %}
+                    <input type="submit" class="watchlist-btn" value="Add to Watchlist">
+                {% endif %}
+            </form>
+        </div>
+        
+        
+            
+            {% if user.is_authenticated %}
             <div class="bid-form">
                 <form>
                     {{ bid_form }}
                     <input class="btn btn-primary" type="submit" value="Enter">
                 </form>
             </div>
-    
-            <div class="close-listing-button">
-                <button>Close Listing</button>
-            </div>
-    
-            <div class="listing-info">
-                <h3>Listing Is Active</h3>
-    
-                <h3>Listing Is No Longer Active</h3>
-    
-                <h3 class="winner">User is the Winner of {{listing.title}}!</h3>
-            </div>
-    
+            {% endif %}
+            
+            {% if user.is_authenticated %}
             <div class="comment-form">
                 <form>
                     {{ comment_form }}
                     <input class="btn btn-primary" type="submit" value="Enter">
                 </form>
             </div>   
+            {% endif %}
     
         </div>
+        {% endif %}
         
 {% endblock %}
