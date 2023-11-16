@@ -1,200 +1,334 @@
+/* Adds padding around the entire content of the body to prevent elements from touching the edges of the screen */
 body {
     padding: 10px;
     font-family: 'Courier New', Courier, monospace, sans-serif;
 }
 
-.form-control,
-input[type=submit] {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+/* Styles for form inputs with the class 'form-control'. Sets width to full container, adds padding, margin, and styles the border */
+.form-control {
+    width: 100%; /* Make the element span the full width of its parent container */
+    padding: 10px; /* Add padding inside the form controls for space around the content */
+    margin: 8px 0; /* Add vertical margin for spacing between form elements */
+    display: inline-block; /* Allows the element to sit next to other inline-block or inline elements */
+    border: 1px solid #ccc; /* Adds a light grey border around the element */
+    border-radius: 4px; /* Rounds the corners of the border */
+    box-sizing: border-box; /* Makes sure the padding and border are included in the total width and height */
 }
 
+/* Styles specifically for 'submit' input types to create button-like appearances */
 input[type=submit] {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
+    width: 100%; /* Make the submit input span the full width of its parent container */
+    background-color: #4CAF50; /* Set the background color of the submit button */
+    color: white; /* Set the text color inside the submit button to white */
+    padding: 14px 20px; /* Add padding inside the button to increase its size and provide space around the text */
+    margin: 8px 0; /* Add vertical margin for spacing between the submit button and other elements */
+    border: none; /* Remove the default border of the submit input */
+    border-radius: 4px; /* Rounds the corners of the submit input */
+    cursor: pointer; /* Changes the cursor to a pointer when hovering over the submit input to indicate it's clickable */
 }
 
-input[type=submit]:hover,
-.listing-details-container input[type=submit]:hover,
-input[type=submit].watchlist-btn:hover,
-.close-listing-button button:hover {
-    background-color: #45a049;
+/* Hover effect for 'submit' input to provide visual feedback when the user hovers over the button */
+input[type=submit]:hover {
+    background-color: #45a049; /* Darken the button color on hover for a visual feedback effect */
 }
 
 .page-heading {
-    font-family: 'Arial', sans-serif;
-    font-size: 2.5rem;
-    color: #333;
+    font-family: 'Arial', sans-serif; /* Use a font that matches your website's design */
+    font-size: 2.5rem; /* Adjust size as needed */
+    font-weight: 700; /* Bold */
+    color: #333; /* Choose a color that fits your theme */
+    text-align: center; /* Center align text, you can change it to left or right if needed */
+    text-transform: uppercase; /* Optional: makes all letters uppercase */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow to the text */
+    margin-top: 20px; /* Adds space to the top */
+    margin-bottom: 20px; /* Adds space to the bottom */
+    letter-spacing: 1.5px; /* Spacing between letters */
+    line-height: 1.2; /* Adjusts the line height */
+    border-bottom: 2px solid #666; /* Optional: adds a bottom border */
+    padding-bottom: 10px; /* Optional: adds padding to the bottom if you have a border */
+}
+
+.empty-message {
     text-align: center;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
-    letter-spacing: 1.5px;
-    line-height: 1.2;
-    border-bottom: 2px solid #666;
-    padding-bottom: 10px;
+    font-weight: bold;
 }
 
 .active-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: stretch;
-    gap: 16px;
     margin: 16px;
     padding: 8px;
+    gap: 16px;
     background-color: #f5f5f5;
     border-radius: 8px;
 }
 
-.active-content,
-.listing-content,
-.listing-details-container,
-.listing-info,
-.comments-section,
-.category-list,
-.messages,
-.info,
-.success,
-.warning,
-.error {
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    padding: 15px;
-    margin: 20px;
+.active-content {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    margin: 8px;
+    gap: 8px;
     align-items: center;
-    text-align: center;
+    justify-content: flex-start;
+    border: 1px solid #ddd; /* Light grey border */
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 4px; /* Rounded corners for each listing */
+    width: 300px; /* Fixed width, adjust as necessary */
 }
 
-.active-content,
-.listing-content,
-.comments-section {
-    width: 300px;
+.active-container h3 {
+    font-weight: 600;
 }
 
-.listing-content,
-.listing-details-container,
-.listing-info,
-.category-list,
-.messages,
-.info,
-.success,
-.warning,
-.error {
-    background-color: #f2f2f2;
-}
-
-img,
-.listing-content img {
-    width: 100%;
+img {
+    width: 250px;
     height: auto;
-    border-radius: 4px;
-    margin-bottom: 12px;
+    border-radius: 4px;;
 }
 
 .listing-content {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the content */
+    padding: 20px;
+    background-color: #f8f8f8; /* Light background color */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.listing-content p,
-.comment,
-.active-content p,
-.category-link {
-    color: #666;
-    line-height: 1.6;
+.listing-content h3 {
+    color: #333; /* Darker color for the title */
     margin-bottom: 10px;
-    text-transform: uppercase; 
+}
+
+.listing-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px; /* Rounded corners for the image */
+    margin-bottom: 20px;
+}
+
+.listing-content p {
+    color: #666; /* Slightly darker text for better readability */
+    line-height: 1.6; /* Improved line spacing */
+    margin-bottom: 10px;
 }
 
 .navbar-nav .nav-item {
     margin-right: 20px;
 }
 
-.listing-details-container button,
-input[type=submit].watchlist-btn,
-.close-listing-button button {
+.listing-details-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.listing-details-container h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.listing-details-container .watchlist-button,
+.listing-details-container .close-listing-button {
+    margin-bottom: 20px;
+}
+
+.listing-details-container button {
     background-color: #007bff;
     color: white;
     padding: 10px 15px;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.listing-details-container button:hover {
+    background-color: #0056b3;
+}
+
+.listing-details-container .bid-form form,
+.listing-details-container .comment-form form {
+    margin-bottom: 20px;
+}
+
+/* Override input[type=submit] for forms in listing-details-container */
+.listing-details-container input[type=submit] {
+    background-color: #28a745; /* Different color for submit buttons */
+}
+
+.listing-details-container input[type=submit]:hover {
+    background-color: #218838;
+}
+
+.winner {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.listing-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e9ecef; /* Light grey background for visibility */
+    border: 1px solid #dee2e6; /* Slight border for definition */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; /* Center align the text for emphasis */
+}
+
+.listing-info h3 {
+    color: #28a745; /* Green color to signify success or winning */
+    font-size: 1.25rem; /* Slightly larger font size for importance */
+    font-weight: bold; /* Bold font for emphasis */
+    margin-bottom: 10px; /* Spacing below the text */
+}
+
+.listing-info .winner {
+    color: #28a745;
+}
+
+.close-listing-button {
+    margin-top: 20px;
+    text-align: center; /* Center the button for emphasis */
+}
+
+.close-listing-button button {
+    background-color: #dc3545; /* A strong color, typically red for significance */
+    color: white; /* White text for contrast */
+    padding: 12px 20px; /* Adequate padding for better clickability */
+    border: none; /* No border for a modern look */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Appropriately sized font */
+    font-weight: bold; /* Bold text for emphasis */
+    cursor: pointer; /* Cursor changes to pointer to indicate clickability */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.close-listing-button button:hover {
+    background-color: #c82333; /* Slightly darker shade on hover for feedback */
+}
+
+input[type=submit].watchlist-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.listing-details-container input[type=submit] {
-    background-color: #28a745;
+input[type=submit].watchlist-btn:hover {
+    background-color: #0056b3;
 }
 
-.winner,
-.listing-info h3 {
-    font-size: 36px;
+.category-list {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f8f8; /* Light gray background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.category-link {
+    display: inline-block;
+    margin: 10px;
+    padding: 8px 15px;
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.category-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .category-list {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center;
+    align-items: center; /* This will center the category links */
+    justify-content: center; /* This will center the content vertically if there's additional height */
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .category-link {
-    display: block; 
-    width: 100%;
+    display: block; /* Change from inline-block to block to take the full width and center text */
+    width: 100%; /* Take the full width to center the text */
+    margin: 10px 0; /* Add vertical margin */
+    padding: 8px 15px;
     background-color: #007bff;
+    color: white;
+    text-align: center; /* Center the text within the link */
+    text-transform: uppercase; /* Make text uppercase */
     text-decoration: none;
     border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .category-link:hover {
     background-color: #0056b3;
 }
 
-.messages,
-.info,
-.success,
-.warning,
-.error {
-    border: 1px solid transparent; 
+.active-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* This will space out the child elements more evenly */
+    align-items: stretch; /* This will make sure all child elements stretch to the same height */
+    gap: 16px; /* Maintain the gap for spacing */
+    margin: 16px;
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
 }
 
-.info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-    border-color: #bee5eb;
+.active-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 16px; 
+    width: 100%; 
+    max-width: 300px; 
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden; 
 }
 
-.success {
-    background-color: #d4edda;
-    color: #155724;
-    border-color: #c3e6cb;
+.active-content h3 {
+    font-weight: 600;
+    margin-bottom: 12px; 
+    text-align: center; 
 }
 
-.warning {
-    background-color: #fff3cd;
-    color: #856404;
-    border-color: #ffeeba;
+.active-content img {
+    width: 100%; 
+    height: auto; 
+    border-radius: 4px;
+    margin-bottom: 12px; 
 }
 
-.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-color: #f5c6cb;
-}
-
-.comments-section {
-    background-color: #f8f9fa;
-}
-
-.comment strong {
-    color: #007bff;
-    margin-right: 5px;
+.active-content p {
+    color: #666;
+    line-height: 1.6;
+    text-align: center; 
+    margin-bottom: 8px; 
 }
