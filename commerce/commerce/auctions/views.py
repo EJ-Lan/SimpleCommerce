@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 
-from .models import Listing, User
+from .models import Bid, Listing, User
 
 class CreateListingForm(forms.Form):
     title = forms.CharField(label='Title', widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -155,3 +155,29 @@ def category_listings(request, category_name):
         "listings": listings,
         "category": category_name
     })
+
+@login_required
+@require_POST
+def submit_bid(request, pk):
+    listing = get_object_or_404(Listing, pk=pk)
+    form = CreateBidForm(request.POST)
+
+    if form.is_valid():
+        bid_amount = form.cleaned_data['bid_amount']
+
+        # Check if the bid is higher than the starting bid and the current highest bid
+        if bid_amount >= listing.start_bid and (listing.current_bid == 0 or bid_amount > listing.current_bid):
+            listing.current_bid = bid_amount
+            listing.save()
+
+            new_bid = Bid(
+                owner = request.user,
+                listing = listing,
+                bid_amount = bid_amount
+            )
+            new_bid.save()
+            messages.success(request, 'Bid placed succesfully!')
+        else:
+            messages.error(request, 'Bid must be at least as large as the starting bid and higher than the current bid')
+
+    return HttpResponseRedirect(reverse('listing_view', args=[pk]))

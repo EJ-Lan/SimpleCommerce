@@ -43,7 +43,8 @@
             
             {% if user.is_authenticated %}
             <div class="bid-form">
-                <form>
+                <form action="{% url 'submit_bid' listing.id %}" method="post">
+                    {% csrf_token %}
                     {{ bid_form }}
                     <input class="btn btn-primary" type="submit" value="Enter">
                 </form>
