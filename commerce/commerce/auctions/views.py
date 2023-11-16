@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 
-from .models import Bid, Listing, User
+from .models import Bid, Comments, Listing, User
 
 class CreateListingForm(forms.Form):
     title = forms.CharField(label='Title', widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -114,11 +114,27 @@ def listing_view(request, pk):
     if request.user.is_authenticated:
         in_watchlist = listing in request.user.watchlist.all()
 
+    if request.method == "POST" and 'comment_submit' in request.POST:
+        comment_form = CreateCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_text = comment_form.cleaned_data['comment_text']
+            comment = Comments(owner=request.user, listing=listing, comment_text=comment_text)
+            comment.save()
+            messages.success(request, "Comment added successfully.")
+            return HttpResponseRedirect(reverse('listing_view', args=[pk]))
+        else:
+            messages.error(request, "Error in comment form.")
+    else:
+        comment_form = CreateCommentForm()
+
+    comments = Comments.objects.filter(listing=listing).order_by('-id')
+    
     return render(request, "auctions/listing_view.html", {
         "listing": listing,
         "bid_form": CreateBidForm(),
-        "comment_form": CreateCommentForm(),
-        "in_watchlist": in_watchlist
+        "comment_form": comment_form,
+        "in_watchlist": in_watchlist,
+        "comments": comments
     })
 
 @login_required
@@ -182,19 +198,20 @@ def submit_bid(request, pk):
 
     return HttpResponseRedirect(reverse('listing_view', args=[pk]))
 
+@login_required
+@require_POST
 def close_auction(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
 
     if request.user != listing.owner:
         messages.error(request, 'You are not authorized to close this auction.')
-        return HttpResponseRedirect(reverse('listing_view'), args=[pk])
-    
+        return HttpResponseRedirect(reverse('listing_view', args=[pk]))
+
     listing.is_active = False
-    # Assuming the highest bid is the current bid on the listing
     highest_bid = Bid.objects.filter(listing=listing).order_by('-bid_amount').first()
     if highest_bid:
         listing.winner = highest_bid.owner
 
     listing.save()
-    messages.success(request, 'Auction closes successfully.')
+    messages.success(request, 'Auction closed successfully.')
     return HttpResponseRedirect(reverse('listing_view', args=[pk]))
