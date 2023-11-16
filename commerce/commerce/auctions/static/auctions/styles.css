@@ -19,7 +19,6 @@ input[type=submit] {
     color: white;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 input[type=submit]:hover,
@@ -29,21 +28,11 @@ input[type=submit].watchlist-btn:hover,
     background-color: #45a049;
 }
 
-.page-heading,
-.active-container h3,
-.listing-content h3,
-.listing-details-container h3,
-.comments-section h3,
-.winner,
-.listing-info h3 {
-    text-align: center;
-    font-weight: bold;
-}
-
 .page-heading {
     font-family: 'Arial', sans-serif;
     font-size: 2.5rem;
     color: #333;
+    text-align: center;
     text-transform: uppercase;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     margin: 20px 0;
@@ -78,22 +67,29 @@ input[type=submit].watchlist-btn:hover,
 .error {
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 15px;
+    margin: 20px;
+    align-items: center;
+    text-align: center;
 }
 
 .active-content,
 .listing-content,
-.listing-info,
 .comments-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    margin: 8px;
-    gap: 8px;
-    border: 1px solid #ddd;
-    background-color: #ffffff;
-    width: 300px; /* Common width for all content boxes */
-    overflow: hidden;
+    width: 300px;
+}
+
+.listing-content,
+.listing-details-container,
+.listing-info,
+.category-list,
+.messages,
+.info,
+.success,
+.warning,
+.error {
+    background-color: #f2f2f2;
 }
 
 img,
@@ -107,42 +103,31 @@ img,
 .listing-content {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #f8f8f8;
 }
 
 .listing-content p,
 .comment,
-.active-content p {
+.active-content p,
+.category-link {
     color: #666;
     line-height: 1.6;
     margin-bottom: 10px;
+    text-transform: uppercase; 
 }
 
 .navbar-nav .nav-item {
     margin-right: 20px;
 }
 
-.listing-details-container,
-.listing-info {
-    padding: 15px;
-    background-color: #f2f2f2;
-}
-
-.listing-details-container .watchlist-button,
-.listing-details-container .close-listing-button,
 .listing-details-container button,
-.close-listing-button button,
-input[type=submit].watchlist-btn {
+input[type=submit].watchlist-btn,
+.close-listing-button button {
+    background-color: #007bff;
     color: white;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
-    margin-right: 10px;
-}
-
-.listing-details-container button,
-input[type=submit].watchlist-btn {
-    background-color: #007bff;
+    transition: background-color 0.3s ease;
 }
 
 .listing-details-container input[type=submit] {
@@ -154,59 +139,55 @@ input[type=submit].watchlist-btn {
     font-size: 36px;
 }
 
-.listing-info,
-.category-list,
-.messages,
-.info,
-.success,
-.warning,
-.error {
-    margin: 20px;
-    padding: 10px;
-}
-
-.category-list,
-.messages {
-    background-color: #f8f8f8;
+.category-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
 }
 
 .category-link {
-    display: inline-block;
-    margin: 10px;
-    padding: 8px 15px;
+    display: block; 
+    width: 100%;
     background-color: #007bff;
-    color: white;
     text-decoration: none;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
 }
 
 .category-link:hover {
     background-color: #0056b3;
 }
 
+.messages,
+.info,
+.success,
+.warning,
+.error {
+    border: 1px solid transparent; 
+}
+
 .info {
     background-color: #d1ecf1;
     color: #0c5460;
-    border: 1px solid #bee5eb;
+    border-color: #bee5eb;
 }
 
 .success {
     background-color: #d4edda;
     color: #155724;
-    border: 1px solid #c3e6cb;
+    border-color: #c3e6cb;
 }
 
 .warning {
     background-color: #fff3cd;
     color: #856404;
-    border: 1px solid #ffeeba;
+    border-color: #ffeeba;
 }
 
 .error {
     background-color: #f8d7da;
     color: #721c24;
-    border: 1px solid #f5c6cb;
+    border-color: #f5c6cb;
 }
 
 .comments-section {
