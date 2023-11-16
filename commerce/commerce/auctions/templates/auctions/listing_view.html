@@ -3,6 +3,16 @@
 {% block body %}
     <h2 class="page-heading">{{listing.title}} Listing</h2>
 
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     
         <div class="listing-content">
             <h3>{{listing.title}}</h3>
@@ -15,9 +25,20 @@
             <p>Starting Bid:{{listing.start_bid}}</p>   
             <p>Current Bid:{{listing.current_bid}}</p> 
             {% if user.is_authenticated %}  
-            <div class="close-listing-button">
-                <button>Close Listing</button>
-            </div>
+            {% if user.is_authenticated and user == listing.owner %}
+                {% if listing.is_active %}
+                    <div class="close-listing-button">
+                        <form action="{% url 'close_auction' listing.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Close Listing">
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="listing-closed-message">
+                        <p>Listing Closed</p>
+                    </div>
+                {% endif %}
+            {% endif %}
             {% endif %}
         </div>
 

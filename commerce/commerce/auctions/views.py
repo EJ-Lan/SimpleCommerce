@@ -82,7 +82,7 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
-
+    
 @login_required
 def create(request):
     if request.method == "POST":
@@ -180,4 +180,21 @@ def submit_bid(request, pk):
         else:
             messages.error(request, 'Bid must be at least as large as the starting bid and higher than the current bid')
 
+    return HttpResponseRedirect(reverse('listing_view', args=[pk]))
+
+def close_auction(request, pk):
+    listing = get_object_or_404(Listing, pk=pk)
+
+    if request.user != listing.owner:
+        messages.error(request, 'You are not authorized to close this auction.')
+        return HttpResponseRedirect(reverse('listing_view'), args=[pk])
+    
+    listing.is_active = False
+    # Assuming the highest bid is the current bid on the listing
+    highest_bid = Bid.objects.filter(listing=listing).order_by('-bid_amount').first()
+    if highest_bid:
+        listing.winner = highest_bid.owner
+
+    listing.save()
+    messages.success(request, 'Auction closes successfully.')
     return HttpResponseRedirect(reverse('listing_view', args=[pk]))
